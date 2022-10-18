@@ -18,65 +18,33 @@
  * @return {ListNode}
  */
 var addTwoNumbers = function(l1, l2) {
-    let l1start = l1;
-    let l2start = l2;
-    while(l1.next !== null){
-        l1 = l1.next;
-    }
-    while(l2.next !== null){
-        l2 = l2.next;
-    }
-    l1.next = l1start;
-    l2.next = l2start;
-
-    //改写原指针。
-    l1start.next = null;
-    l2start.next = null;
-
-    //工作指针
-    let p1 = l1;
-    let p2 = l2;
-    let acc = 0;
-    let res = null;
-
-    while(p1.next !== null || p2.next !== null){
-        let v1 = p1.val;
-        let v2 = p2.val;
-        let value =  (acc + v1+ v2)%10;
-        acc = (acc + v1+ v2) /10;
-        let newNode =  {
-            val:value,
-            next:null
-        }
-        newNode.next =res;
-        res = newNode;
-       
-        p1 = p1.next;
-        p2 = p2.next;
-    }
-    while(p1.next !==null){
-        let v1 = p1.val;
-        let value =  (acc + v1)%10;
-        acc = (acc + v1) /10;
-        let newNode =  {
-            val:value,
-            next:null
-        }
-        newNode.next =res;
-        res = newNode;
-    }
-    while(p2.next !==null){
-        let v1 = p2.val;
-        let value =  (acc + v2)%10;
-        acc = (acc + v2) /10;
-        let newNode =  {
-            val:value,
-            next:null
-        }
-        newNode.next =res;
-        res = newNode;
-    }
-    return res;
+  let acc = 0;
+  let l1Head = l1;
+  let l2Head = l2;
+  const res = new ListNode(null);
+  let  work = res;
+  while(l1Head && l2Head){
+    const l1val = l1Head.val;
+    const l2val = l2Head.val;
+    let  cur = (l1val + l2val + acc) % 10;
+    acc = Math.floor((l1val + l2val + acc) /10);
+    work.next = new ListNode(cur);
+    work = work.next;
+    l1Head = l1Head.next;
+    l2Head = l2Head.next;
+  }
+  let rest =  l1Head || l2Head; 
+  while(rest){
+   let  cur = (rest.val + acc) %10;
+     acc = Math.floor((rest.val + acc) /10);
+    work.next = new ListNode(cur);
+    work = work.next;
+    rest = rest.next;
+  }
+  if(acc){
+    work.next = new ListNode(acc);
+  }
+  return res.next;
 };
 // @lc code=end
 
