@@ -28,7 +28,7 @@ var findMedianSortedArrays = function(nums1, nums2) {
         if(len1 ===0) return nums2[start2+k-1];
         if(k==1) return Math.min(nums1[start1],nums2[start2]); // 返回当前两个数组中，第一小的那个数即可
 
-        let mid1 = start1 + Math.min(Math.floor(k/2),len1) -1;
+        let mid1 = start1 + Math.min(Math.floor(k/2),len1) -1; // 每个数组取出第k/2个数来比较，数组长度不够的话，就取当前数组的最后一位就好。
         let mid2 = start2 + Math.min(Math.floor(k/2),len2) -1;
         if(nums1[mid1] > nums2[mid2] ){
             return  getKth(nums1,start1,end1,nums2,mid2+1,end2, k - (mid2 - start2 + 1));
