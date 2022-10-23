@@ -10,30 +10,24 @@
  * @return {boolean}
  */
 var isValid = function (s) {
-    let stack  = [];
-    let value = {
-        '(':-1,
-        '{':-2,
-        '[':-3,
-        ')':1,
-        "}":2,
-        "]":3
+   let map = {
+    '(':')',
+    "[":"]",
+    "{":"}",
+   };
+   let lftMap = new Set(["[","{","("]);
+   let stack = [];
+   for(let i=0;i<s.length;i++){
+    let curStr = s[i];
+    if(lftMap.has(curStr)){
+        stack.push(curStr);
+    }else{
+        let stackTop = stack.pop();
+        if(map[stackTop] === curStr) continue;
+        return false;
     }
-    if(s.length ===0) return true;
-    stack.push(s[0]);
-    for(let i=1;i<=s.length-1;i++){
-        if(value[s[i]]<0){
-            stack.push(s[i]);
-        }else{
-            let top = stack[stack.length-1];
-            if(value[top] + value[s[i]] !==0){
-                return false;
-            }else{
-                stack.pop();
-            }
-        } 
-    }
-    if(stack.length ===0) return true;
-    return false;
+   }
+   if(stack.length > 0)return false;
+   return true
 };
 // @lc code=end

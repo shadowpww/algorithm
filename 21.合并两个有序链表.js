@@ -18,32 +18,30 @@
  * @return {ListNode}
  */
 var mergeTwoLists = function(l1, l2) {
-    if(l1 ===null) return l2;
-    if(l2 === null) return l1;
-    let work = null;  
-    let res =null;
-    if(l1.val < l2.val){
-          work=  res = l1;
-         l1 = l1.next;
-            
-        }else{
-         work =  res = l2;
-          l2 = l2.next;
-    }
-    while(l1 !==null && l2 !==null){
-        if(l1.val < l2.val){
-            work.next = l1;
+    if(!l1)return l2;
+    if(!l2) return l1;
+    let dump = new ListNode(null);
+    let last = dump; // 执行结果链表中的最后一个节点
+    while(l1 && l2){
+        let v1 = l1.val;
+        let v2 = l2.val;
+        if(v1 < v2){
+            last.next = l1;
+            last = l1;
             l1 = l1.next;
-           
         }else{
-            work.next = l2;
+            last.next = l2;
+            last = l2;
             l2 = l2.next;
         }
-        work = work.next;
     }
-    if(l1 !==null) work.next = l1;
-    if(l2 !== null) work.next = l2;
-    return res;
+    let tmp = l1 || l2;
+    while(tmp){
+        last.next = tmp;
+        last = tmp;
+        tmp = tmp.next;
+    }
+    return dump.next;
 };
 // @lc code=end
 
