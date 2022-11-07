@@ -17,21 +17,34 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
+
+
+// var inorderTraversal = function(root) {
+//     let res = [];
+//     function dfs(node){
+//         if(!node) return ;
+//         if(node.left) dfs(node.left);
+//         res.push(node.val);
+//         if(node.right) dfs(node.right);
+//     }
+//     dfs(root);
+//     return res;
+// }
+
 var inorderTraversal = function(root) {
     let stack = [];
     let res = [];
-    let cur = root;
-    while(cur !==null || stack.length!==0){
-        if(cur!== null){
-            stack.push(cur);
-            cur = cur.left;
-        }else{
-            cur = stack.pop();
-            res.push(cur.val);
-            cur = cur.right;
+    stack.push(root);
+    while(stack.length > 0){
+        let cur = stack.pop();
+        if(cur instanceof TreeNode){
+            stack.push(cur.right,cur.val,cur.left);
+        }else if(typeof cur ===  'number'){
+            res.push(cur);
         }
     }
     return res;
 }
+
 // @lc code=end
 

@@ -17,30 +17,45 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
+// var preorderTraversal = function(root) {
+//     let stack = [];
+//     let res = [];
+//     if(!root){
+//         return []
+//     }
+//     stack.push(root);
+//     while(stack.length !==0){
+//         let cur = stack.shift();
+//         res.push(cur.val);
+//         cur.right  && stack.unshift(cur.right);
+//         cur.left  && stack.unshift(cur.left);
+//     }
+//     return res;
+
+//     // if(!root){
+//     //     return [];
+//     // }
+//     // let res = [];
+//     // res.push(root.val);
+//     // root.left && (res = res.concat(preorderTraversal(root.left)));
+//     // root.right && (res = res.concat(preorderTraversal(root.right)));
+//     // return res;
+// };
+
 var preorderTraversal = function(root) {
-    let stack = [];
+    let stack =[];
     let res = [];
-    if(!root){
-        return []
-    }
     stack.push(root);
-    while(stack.length !==0){
-        let cur = stack.shift();
-        res.push(cur.val);
-        cur.right  && stack.unshift(cur.right);
-        cur.left  && stack.unshift(cur.left);
+    while(stack.length>0){
+        let cur = stack.pop();
+        if(cur === null) continue;
+        if(cur instanceof TreeNode){
+            stack.push(cur.right,cur.left,cur.val);
+        }else if(typeof cur === 'number'){
+            res.push(cur);
+        }
     }
     return res;
-
-    // if(!root){
-    //     return [];
-    // }
-    // let res = [];
-    // res.push(root.val);
-    // root.left && (res = res.concat(preorderTraversal(root.left)));
-    // root.right && (res = res.concat(preorderTraversal(root.right)));
-    // return res;
-};
-
+}
 // @lc code=end
 
