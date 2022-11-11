@@ -27,15 +27,28 @@
 //     }
 //     return max
 // };
+
+// var maxProfit = function(prices) {
+//     const length = prices.length;
+//     if(length <2) return 0;
+//     const dp = new Array(length).fill(0);
+//     let min = prices[0], max = 0;
+//     for(let i=1;i<length;i++){
+//         dp[i] = Math.max(dp[i-1],prices[i] > min ? prices[i] - min : 0);
+//         max = Math.max(dp[i],dp[i-1]);
+//         min = Math.min(min,prices[i]);
+//     }
+//     return max;
+// };
+
 var maxProfit = function(prices) {
-    const length = prices.length;
-    if(length <2) return 0;
-    const dp = new Array(length).fill(0);
-    let min = prices[0], max = 0;
-    for(let i=1;i<length;i++){
-        dp[i] = Math.max(dp[i-1],prices[i] > min ? prices[i] - min : 0);
-        max = Math.max(dp[i],dp[i-1]);
-        min = Math.min(min,prices[i]);
+    if(prices.length ==0)return 0;
+    let dp = new Array(prices.length).fill(0);
+    dp[0] = prices[0];
+    let max = 0;
+    for(let i=1;i<prices.length;i++){
+        dp[i] = Math.min(prices[i],dp[i-1]);
+        max = Math.max(max,prices[i] - dp[i-1]);
     }
     return max;
 };
