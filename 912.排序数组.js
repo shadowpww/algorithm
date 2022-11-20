@@ -45,5 +45,9 @@ function quickSort(nums,left,right){
     quickSort(nums,sortIdx+1,right);
 }
 
+// var arr = [900,983,28323,23,1,0,-19,-18,2,2,3,5,6,100];
+// quickSort(arr,0,arr.length-1);
+// console.log(arr);
+
 // @lc code=end
 
