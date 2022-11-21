@@ -83,6 +83,7 @@
 ### 4.2. 网络基础
 
 1. [HTTP/3 原理与实践](https://mp.weixin.qq.com/s/iF0wbV5o7HVjGG_Cb-RcOg)
+2. [TCP三次握手、四次挥手](https://www.zhihu.com/question/483007245/answer/2762016893)
 
 ### 4.3 浏览器原理
 
